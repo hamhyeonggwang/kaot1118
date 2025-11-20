@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Youtube, Info, Users, Phone, X, Sparkles } from 'lucide-react';
+import { BookOpen, Newspaper, Map, Youtube, Phone, Sparkles } from 'lucide-react';
 
 export default function KioskLanding() {
   const [showLogo, setShowLogo] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState(null);
   const [particles, setParticles] = useState([]);
 
   // 파티클 효과 생성
@@ -34,88 +33,44 @@ export default function KioskLanding() {
 
   const menuItems = [
     {
+      id: 'intro',
+      title: '작업치료 소개\n정보 자료',
+      icon: BookOpen,
+      color: 'from-blue-500 via-cyan-500 to-teal-500',
+      link: 'https://kaot.org/pds/definition.jsp',
+      description: '작업치료 정의, 교육과정, 자료를 한눈에 확인하세요'
+    },
+    {
+      id: 'news',
+      title: '공지·소식\n협회보 / 기사',
+      icon: Newspaper,
+      color: 'from-purple-500 via-indigo-500 to-blue-500',
+      link: 'https://kaot.org/board/index.jsp?code=move',
+      description: '협회의 최신 공지와 언론 보도를 빠르게 전달합니다'
+    },
+    {
+      id: 'branch',
+      title: '지부 및\n산하단체 안내',
+      icon: Map,
+      color: 'from-green-500 via-emerald-500 to-teal-500',
+      link: 'https://kaot.org/intro/branch.jsp',
+      description: '전국 지부, 임원진, 협력 학회 정보를 안내합니다'
+    },
+    {
       id: 'youtube',
-      title: '작업치료\n더 알아보기',
+      title: '유튜브 채널\n바로가기',
       icon: Youtube,
       color: 'from-red-500 via-pink-500 to-rose-500',
       link: 'https://www.youtube.com/@kaot-ot-ati',
       description: '작업치료에 대한 다양한 영상 콘텐츠를 확인하세요'
-    },
-    {
-      id: 'info',
-      title: '유용한\n정보',
-      icon: Info,
-      color: 'from-blue-500 via-cyan-500 to-teal-500',
-      action: 'info',
-      description: '작업치료 관련 최신 정보와 자료를 제공합니다'
-    },
-    {
-      id: 'partners',
-      title: '협력기관',
-      icon: Users,
-      color: 'from-purple-500 via-indigo-500 to-blue-500',
-      action: 'partners',
-      description: '국내외 협력기관과의 네트워크를 확인하세요'
-    },
-    {
-      id: 'contact',
-      title: '연락하기',
-      icon: Phone,
-      color: 'from-green-500 via-emerald-500 to-teal-500',
-      link: 'http://kaot.org',
-      description: '협회에 문의하거나 연락하실 수 있습니다'
     }
   ];
 
   const handleMenuClick = (item) => {
     if (item.link) {
       window.open(item.link, '_blank');
-    } else if (item.action) {
-      setSelectedMenu(item.action);
     }
   };
-
-  const closeModal = () => {
-    setSelectedMenu(null);
-  };
-
-  const infoContent = [
-    {
-      title: '작업치료 최신 자료',
-      items: ['학술 논문 및 연구 자료', '치료 프로토콜 가이드', '증례 연구 모음']
-    },
-    {
-      title: '교육 프로그램',
-      items: ['보수 교육 과정', '전문가 세미나', '온라인 강의']
-    },
-    {
-      title: '학술활동',
-      items: ['영역별 전문학술활동', '컨퍼런스', '워크샵 일정']
-    },
-    {
-      title: '면허 회원 혜택',
-      items: ['교육 할인 혜택', '자료실 이용', '네트워킹 기회']
-    }
-  ];
-
-  const partnersContent = [
-    {
-      title: '의료기관',
-      items: ['대학병원', '재활병원', '요양시설', '재가서비스']
-    },
-    {
-      title: '교육기관',
-      items: ['작업치료학과', '대학원', '연수원', '교육센터']
-    },
-    {
-      title: '연구기관',
-      items: ['연구소', '학술단체', '국제기구', '협력 네트워크']
-    },
-    {
-      title: '정부기관',
-      items: ['보건복지부', '지방자치단체', '공공기관', '정책연구소']
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 relative overflow-hidden">
@@ -244,112 +199,22 @@ export default function KioskLanding() {
           </div>
 
           {/* Footer */}
-          <div className="mt-12 md:mt-16 text-center text-slate-500 text-sm md:text-base">
-            <p>© 대한작업치료사협회 (KAOT)</p>
-          </div>
-        </div>
-      )}
-
-      {/* Info Modal */}
-      {selectedMenu === 'info' && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 md:p-8 animate-fadeIn"
-          onClick={closeModal}
-        >
-          <div
-            className="glass-dark rounded-3xl p-6 md:p-12 max-w-4xl w-full shadow-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 animate-scaleIn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                <Info className="w-8 h-8 text-blue-400" />
-                유용한 정보
-              </h2>
-              <button
-                onClick={closeModal}
-                className="p-2 hover:bg-white/10 rounded-full transition-colors duration-200"
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
+          <div className="mt-12 md:mt-16 w-full max-w-6xl relative z-10">
+            <div className="glass-dark rounded-3xl p-6 md:p-10 text-slate-100 shadow-xl">
+              {/* Contact Information */}
+              <div className="flex flex-col gap-4 text-sm md:text-base leading-relaxed">
+                <p className="text-slate-300">
+                  서울특별시 영등포구 여의나루로 67 신송빌딩 503 | 대표자 : 이지은 | 고유번호: 110-82-08192
+                </p>
+                <p className="text-slate-300">
+                  TEL : 02-3672-0616 (*운영시간 : 평일 9시-18시 / *전화상담시간 : 11시-12시/13시-15시) (점심시간 : 12시-13시) |
+                  Fax. 02-3672-2339
+                </p>
+                <p className="text-slate-300">
+                  이메일: (Korean)kaotoffice@kaot.org / (international)kaot.int@kaot.org
+                </p>
+              </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {infoContent.map((section, index) => (
-                <div
-                  key={index}
-                  className="glass rounded-2xl p-6 hover:bg-white/5 transition-all duration-300 hover:scale-105"
-                >
-                  <h3 className="text-xl font-bold text-blue-300 mb-4">{section.title}</h3>
-                  <ul className="space-y-2">
-                    {section.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-blue-100 flex items-start gap-2">
-                        <span className="text-blue-400 mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={closeModal}
-              className="mt-8 w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl text-lg md:text-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              닫기
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Partners Modal */}
-      {selectedMenu === 'partners' && (
-        <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 md:p-8 animate-fadeIn"
-          onClick={closeModal}
-        >
-          <div
-            className="glass-dark rounded-3xl p-6 md:p-12 max-w-4xl w-full shadow-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 animate-scaleIn"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                <Users className="w-8 h-8 text-purple-400" />
-                협력기관
-              </h2>
-              <button
-                onClick={closeModal}
-                className="p-2 hover:bg-white/10 rounded-full transition-colors duration-200"
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {partnersContent.map((section, index) => (
-                <div
-                  key={index}
-                  className="glass rounded-2xl p-6 hover:bg-white/5 transition-all duration-300 hover:scale-105"
-                >
-                  <h3 className="text-xl font-bold text-purple-300 mb-4">{section.title}</h3>
-                  <ul className="space-y-2">
-                    {section.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-purple-100 flex items-start gap-2">
-                        <span className="text-purple-400 mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={closeModal}
-              className="mt-8 w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-4 rounded-xl text-lg md:text-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              닫기
-            </button>
           </div>
         </div>
       )}
