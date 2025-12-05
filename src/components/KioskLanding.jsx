@@ -211,7 +211,7 @@ export default function KioskLanding() {
                   Fax. 02-3672-2339
                 </p>
                 <p className="text-slate-300">
-                  이메일: (Korean)kaotoffice@kaot.org / (international)kaot.int@kaot.org
+                  이메일: (Korean)kaotoffice@kaot.org / (International)kaot.int@kaot.org
                 </p>
               </div>
             </div>
